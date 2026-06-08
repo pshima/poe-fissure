@@ -57,6 +57,9 @@ rsync -avz --delete \
 echo "→ Installing $APPDIR/app.env (600, deploy-owned)..."
 ssh "$DROPLET" "install -o deploy -g deploy -m 600 /dev/stdin $APPDIR/app.env && rm -f $APPDIR/.env" < "$ENVTMP"
 
+echo "→ Ensuring the shared 'edge' network exists..."
+ssh "$DROPLET" "sudo -u deploy bash -lc 'docker network create edge 2>/dev/null || true'"
+
 echo "→ Building + starting the stack on the droplet..."
 ssh "$DROPLET" "sudo -u deploy bash -lc 'cd $APPDIR && docker compose -f docker-compose.prod.yml up -d --build'"
 

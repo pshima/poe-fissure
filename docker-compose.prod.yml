@@ -17,7 +17,7 @@ services:
     volumes:
       - poefissure-data:/data
     networks:
-      - poefissure
+      - edge
     restart: unless-stopped
 
   # cloudflared reads TUNNEL_TOKEN from app.env (env_file passes values literally,
@@ -30,12 +30,16 @@ services:
     depends_on:
       - poefissure
     networks:
-      - poefissure
+      - edge
     restart: unless-stopped
 
 volumes:
   poefissure-data:
 
+# Shared external network so any droplet cloudflared replica (this app's or another
+# app's, since they're HA replicas of the same tunnel) can reach the poefissure
+# container by name. Every droplet app + its cloudflared must join this network.
+# Created once on the droplet:  docker network create edge
 networks:
-  poefissure:
-    driver: bridge
+  edge:
+    external: true

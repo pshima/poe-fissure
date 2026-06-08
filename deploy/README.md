@@ -14,8 +14,17 @@ Two supported targets:
 
 ## Droplet deploy (blt-infra `droplet-sfo` tunnel)
 
-Uses `docker-compose.prod.yml` at the repo root (app + a `cloudflared` sidecar on a
-private network). Follows the blt-infra "DO Droplet Apps" pattern.
+Uses `docker-compose.prod.yml` at the repo root (app + a `cloudflared` sidecar).
+Follows the blt-infra "DO Droplet Apps" pattern.
+
+**Shared `edge` network (required for 2+ droplet apps).** All droplet apps share the
+`droplet-sfo` Cloudflare Tunnel, and their cloudflared sidecars are HA replicas —
+Cloudflare may route any app's traffic to any replica. So every replica must be able
+to reach every app's container. To guarantee that, all droplet apps + their
+cloudflareds join one external `edge` network (created once: `docker network create
+edge`). poefissure's compose already does this; any other droplet app (e.g.
+orcas-sales) must add `edge` to its services too, or it will intermittently 502 when a
+replica that can't reach it serves its traffic.
 
 ### 1. Register the hostname in blt-infra (Terraform)
 
