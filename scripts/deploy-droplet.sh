@@ -27,17 +27,23 @@ REFRESH="$(jq -r '.refresh_token // empty' "$TOKEN_JSON")"
 
 # Carry the app vars over from .env.local and assemble the prod .env locally.
 set -a; source "$LOCAL_ENV"; set +a
+
+# Recent Docker Compose interpolates $ in env_file values, which mangles the
+# bcrypt password hash ($2a$10$...). Double every $ so Compose restores a literal
+# one in the container env (a no-op for values without $).
+esc() { printf '%s' "$1" | sed 's/[$]/$$/g'; }
+
 ENVTMP="$(mktemp)"; trap 'rm -f "$ENVTMP"' EXIT
 cat > "$ENVTMP" <<EOF
-TUNNEL_TOKEN=$TUNNEL_TOKEN
-APP_PASSWORD_HASH=$APP_PASSWORD_HASH
-SESSION_SECRET=$SESSION_SECRET
-POE_CHARACTER=$POE_CHARACTER
-POE_LEAGUE=$POE_LEAGUE
-POE_REALM=${POE_REALM:-poe2}
-POE_CONTACT=${POE_CONTACT:-}
-POE_SESSID=${POE_SESSID:-}
-GGG_REFRESH_TOKEN=$REFRESH
+TUNNEL_TOKEN=$(esc "$TUNNEL_TOKEN")
+APP_PASSWORD_HASH=$(esc "$APP_PASSWORD_HASH")
+SESSION_SECRET=$(esc "$SESSION_SECRET")
+POE_CHARACTER=$(esc "$POE_CHARACTER")
+POE_LEAGUE=$(esc "$POE_LEAGUE")
+POE_REALM=$(esc "${POE_REALM:-poe2}")
+POE_CONTACT=$(esc "${POE_CONTACT:-}")
+POE_SESSID=$(esc "${POE_SESSID:-}")
+GGG_REFRESH_TOKEN=$(esc "$REFRESH")
 EOF
 
 echo "→ Ensuring $APPDIR exists (deploy-owned)..."
