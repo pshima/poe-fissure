@@ -13,19 +13,20 @@ services:
       context: .
       dockerfile: deploy/Dockerfile
     container_name: poefissure
-    env_file: .env
+    env_file: app.env
     volumes:
       - poefissure-data:/data
     networks:
       - poefissure
     restart: unless-stopped
 
+  # cloudflared reads TUNNEL_TOKEN from app.env (env_file passes values literally,
+  # so no ${} interpolation — which would choke on the $ in the bcrypt hash).
   cloudflared:
     image: cloudflare/cloudflared:latest
     container_name: poefissure-cloudflared
     command: tunnel run
-    environment:
-      - TUNNEL_TOKEN=${TUNNEL_TOKEN}
+    env_file: app.env
     depends_on:
       - poefissure
     networks:

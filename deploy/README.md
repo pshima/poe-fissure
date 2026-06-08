@@ -31,27 +31,29 @@ tunnel ingress rule + CNAME automatically.
 
 ### 2. Prepare secrets on the droplet
 
-Mint the GGG refresh token locally (`./poefissure auth login`, copy `refresh_token`
-from the token file), grab your POESESSID, and generate the password hash + session
-secret (`./poefissure-server hash '...'`, `gen-secret`). Then on the droplet, write
-`/opt/poefissure/.env` from `deploy/.env.prod.example`, including the
-`TUNNEL_TOKEN` (`terraform -chdir=terraform/cloudflare output -raw droplet_tunnel_token`).
+Mint the GGG refresh token locally (`./poefissure auth login`), grab your POESESSID,
+and have your local `.env.local` set (from `scripts/setup-local.sh`).
 
 ### 3. Ship the source and bring it up
 
+Just run the helper from the repo root — it assembles `/opt/poefissure/app.env` from
+your local secrets (tunnel token from terraform, refresh token from `token.json`,
+password/POESESSID from `.env.local`), rsyncs the source, and builds + starts the
+stack:
+
 ```bash
-rsync -avz --delete --exclude='.env' --exclude='.git/' --exclude='data/' \
-  --exclude='web/node_modules/' --exclude='web/dist/' \
-  --rsync-path='sudo -u deploy rsync' \
-  ./ root@138.197.214.133:/opt/poefissure/
-ssh root@138.197.214.133 \
-  'sudo -u deploy bash -lc "cd /opt/poefissure && docker compose -f docker-compose.prod.yml up -d --build"'
+./scripts/deploy-droplet.sh
 ```
 
-Always keep `--exclude='.env'` on the rsync (`--delete` would otherwise wipe the
-tunnel token). Verify: `docker compose ps` (both `Up`), `docker logs
+Verify (the script prints these): `docker compose ps` (both `Up`), `docker logs
 poefissure-cloudflared` ("Connection registered"), and `curl -I
 https://poe-fissure.bltech.app` → 200 once DNS propagates.
+
+Note: secrets live in `/opt/poefissure/app.env` (not `.env`) and are passed to the
+containers via `env_file` with no `${}` interpolation, so the `$` in the bcrypt hash
+is safe. The rsync excludes are anchored to the repo root (`/data/`,
+`/poefissure-server`) so they don't clobber `internal/craft/data` or
+`cmd/poefissure-server`.
 
 ---
 
