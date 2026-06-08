@@ -1,0 +1,32 @@
+# poe-fissure configuration.
+# Copy to ~/.config/poefissure/config.yaml (macOS: ~/Library/Application Support/poefissure/config.yaml)
+
+# OAuth public client id. Defaults to "pob" — the public client Path of Building
+# ships (no secret; it's plaintext in their open-source code), which lets this tool
+# authenticate against the official PoE2 API without its own GGG registration.
+# Replace with your own GGG-approved client id to stop riding on pob's (see README).
+client_id: "pob"
+# Contact email embedded in the required User-Agent header.
+contact: "pete@xq3.net"
+version: "0.1.0"
+
+# PoE2 realm + the character to query by default.
+realm: "poe2"
+character: "Frozenmulligan"
+league: "Runes of Aldur"
+
+# Localhost OAuth callback port. Used ONLY with your own client_id. The default
+# "pob" client ignores this and binds one of pob's registered ports (49082-49084).
+redirect_port: 49082
+
+# Cap on suggested upgrade cost.
+budget:
+  currency: "divine"
+  amount: 50
+
+# Heuristic scorer weights (higher = more influence on ranking).
+weights:
+  dps: 1.0
+  survivability: 1.0
+  resists: 1.5
+  attributes: 1.0

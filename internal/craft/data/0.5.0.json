@@ -1,0 +1,137 @@
+{
+  "version": "0.5.0",
+  "league": "Runes of Aldur",
+  "currencies": {
+    "transmutation": { "name": "Orb of Transmutation", "effect": "Upgrades a Normal item to Magic with one affix. Always step 1." },
+    "augmentation": { "name": "Orb of Augmentation", "effect": "Adds a second affix to a Magic item (opposite side)." },
+    "regal": { "name": "Regal Orb", "effect": "Upgrades a Magic item to Rare, adding one affix. Pair with Coronation omens or essences to remove the gamble." },
+    "alchemy": { "name": "Orb of Alchemy", "effect": "Upgrades a Normal item directly to Rare (~4 affixes). Mostly for Waystones." },
+    "exalted": { "name": "Exalted Orb", "effect": "Adds one random affix to a Rare item with an open slot. The finishing orb; Greater for routine, Perfect when the slam matters." },
+    "chaos": { "name": "Chaos Orb", "effect": "Removes one random affix and adds one new affix on a Rare. Pair with Whittling/Erasure omens to target." },
+    "annulment": { "name": "Orb of Annulment", "effect": "Removes one random affix. Pair with Sinistral/Dextral Annulment to target a side." },
+    "divine": { "name": "Divine Orb", "effect": "Re-rolls the numeric values of all affixes within their tier ranges (not the affixes themselves). Final polish only." },
+    "fracturing": { "name": "Fracturing Orb", "effect": "Permanently locks one RANDOM affix on a Rare with 4+ mods (immune to Chaos/Annul/Divine/Vaal). 9+ divines; high-end only." },
+    "vaal": { "name": "Vaal Orb", "effect": "Corrupts an item (random outcome; in 0.5 mod-change multiplies values). Irreversible, always the final step." }
+  },
+  "essences": {
+    "note": "Essences guarantee one specific modifier and upgrade Magic→Rare. In 0.5 an item can carry at most ONE essence/alloy modifier. A Perfect Essence works on a Rare: it removes a random mod, then adds its guaranteed mod (pair with Crystallisation omens for side control).",
+    "examples": {
+      "body": "Essence of the Body — Maximum Life.",
+      "abrasion": "Essence of Abrasion — flat Physical Damage (weapons).",
+      "flames_ice_electricity": "Essence of Flames/Ice/Electricity — flat elemental damage (weapons).",
+      "sorcery": "Perfect Essence of Sorcery — spell damage / +to spell levels.",
+      "battle": "Perfect Essence of Battle — +levels to all attack skills (+3 on 2H/Crossbow, +2 on 1H/Bow in 0.5). Key for martial weapons.",
+      "ruin": "Essence of Ruin — Chaos Resistance (cheap chaos-res fix)."
+    }
+  },
+  "alloys": {
+    "note": "Runic Alloys (0.5, ~13 types) replace one existing mod with a guaranteed mod from an otherwise-uncraftable pool (Imbued=ailment, Expansive=area, Mystic=caster, Swift=speed). Like Perfect Essences they remove a random mod — fill the opposite slot type first so the removal can't hit a keeper."
+  },
+  "essenceTargets": [
+    { "essence": "Essence of the Body", "guarantees": "Maximum Life", "match": ["maximum life", "to maximum life"] },
+    { "essence": "Essence of Enhancement", "guarantees": "increased Armour / Evasion / Energy Shield", "match": ["armour/evasion/energy shield", "armour / evasion / energy shield", "increased armour", "increased evasion", "increased energy shield", "increased defences"] },
+    { "essence": "Essence of Abrasion", "guarantees": "Adds Physical Damage (weapons)", "match": ["physical damage", "adds physical"] },
+    { "essence": "Essence of Flames", "guarantees": "Adds Fire Damage (weapons)", "match": ["fire damage", "adds fire"] },
+    { "essence": "Essence of Ice", "guarantees": "Adds Cold Damage (weapons)", "match": ["cold damage", "adds cold"] },
+    { "essence": "Essence of Electricity", "guarantees": "Adds Lightning Damage (weapons)", "match": ["lightning damage", "adds lightning"] },
+    { "essence": "Perfect Essence of Sorcery", "guarantees": "Spell Damage / +to Spell Levels", "match": ["spell damage", "spell skills", "level of all spell"] },
+    { "essence": "Perfect Essence of Battle", "guarantees": "+Levels to all Attack Skills", "match": ["attack skills", "level of all attack"] },
+    { "essence": "Essence of Seeking", "guarantees": "Critical Hit Chance", "match": ["critical hit chance", "critical"] },
+    { "essence": "Essence of Warding", "guarantees": "Elemental Resistance", "match": ["fire resistance", "cold resistance", "lightning resistance", "elemental resistance", "to resistance"] },
+    { "essence": "Essence of Ruin", "guarantees": "Chaos Resistance", "match": ["chaos resistance"] },
+    { "essence": "Essence of Haste", "guarantees": "Attack / Cast Speed", "match": ["attack speed", "cast speed"] }
+  ],
+  "omens": {
+    "sinistral_exaltation": { "name": "Omen of Sinistral Exaltation", "effect": "Next Exalted Orb adds a PREFIX only." },
+    "dextral_exaltation": { "name": "Omen of Dextral Exaltation", "effect": "Next Exalted Orb adds a SUFFIX only." },
+    "greater_exaltation": { "name": "Omen of Greater Exaltation", "effect": "Next Exalted Orb adds TWO mods." },
+    "catalysing_exaltation": { "name": "Omen of Catalysing Exaltation", "effect": "Next Exalted Orb (jewellery) is biased toward mods sharing a tag with the applied catalyst quality (~5x weight at 20% quality, ~7.5x at 40%). The in-league tag-bias tool." },
+    "sinistral_annulment": { "name": "Omen of Sinistral Annulment", "effect": "Next Orb of Annulment removes a PREFIX only." },
+    "dextral_annulment": { "name": "Omen of Dextral Annulment", "effect": "Next Orb of Annulment removes a SUFFIX only." },
+    "greater_annulment": { "name": "Omen of Greater Annulment", "effect": "Next Orb of Annulment removes TWO mods." },
+    "sinistral_crystallisation": { "name": "Omen of Sinistral Crystallisation", "effect": "Next Perfect/Corrupted Essence removes its random mod from the PREFIX side." },
+    "dextral_crystallisation": { "name": "Omen of Dextral Crystallisation", "effect": "Next Perfect/Corrupted Essence removes its random mod from the SUFFIX side." },
+    "sinistral_coronation": { "name": "Omen of Sinistral Coronation", "effect": "Next Regal Orb adds a PREFIX only." },
+    "dextral_coronation": { "name": "Omen of Dextral Coronation", "effect": "Next Regal Orb adds a SUFFIX only." },
+    "whittling": { "name": "Omen of Whittling", "effect": "Next Chaos Orb removes the mod with the LOWEST item-level requirement (NOT lowest tier — hover to confirm). Expensive cleanup tool." },
+    "sinistral_necromancy": { "name": "Omen of Sinistral Necromancy", "effect": "Next desecration (Abyssal Bone) adds a PREFIX-side Desecrated mod only." },
+    "dextral_necromancy": { "name": "Omen of Dextral Necromancy", "effect": "Next desecration adds a SUFFIX-side Desecrated mod only." },
+    "abyssal_echoes": { "name": "Omen of Abyssal Echoes", "effect": "At the Well of Souls, the three offered Desecrated mods can be rerolled once (effectively 6 options)." },
+    "light": { "name": "Omen of Light", "effect": "Next Orb of Annulment removes ONLY the Desecrated modifier (retry a failed desecrate)." }
+  },
+  "leagueUnavailable": [
+    "Omen of Homogenising Exaltation",
+    "Recombinator",
+    "Omen of Recombination",
+    "Omen of Corruption"
+  ],
+  "suggestedTargets": {
+    "Bow": ["increased Physical Damage", "Adds Physical Damage", "Adds Cold Damage", "increased Attack Speed", "+Level of all Projectile Skills", "Critical Hit Chance"],
+    "Crossbow": ["increased Physical Damage", "Adds Physical Damage", "increased Attack Speed", "Grenade Damage", "Critical Hit Chance", "+Level of all Projectile Skills"],
+    "Quarterstaff": ["increased Physical Damage", "Adds Physical Damage", "increased Attack Speed", "Critical Hit Chance", "+Level of all Melee Skills"],
+    "Staff": ["increased Spell Damage", "Gain % of Damage as Extra Damage", "Critical Hit Chance for Spells", "Critical Spell Damage Bonus", "+Level of all Spell Skills"],
+    "Wand": ["increased Spell Damage", "Adds Damage to Spells", "Critical Hit Chance for Spells", "+Level of all Spell Skills"],
+    "Sceptre": ["increased Minion Damage", "+Level of all Minion Skills", "increased Spirit", "Minion Life"],
+    "Body Armour": ["Maximum Life", "Elemental Resistance", "increased Armour/Evasion/Energy Shield", "Life Regeneration"],
+    "Helmet": ["Maximum Life", "Elemental Resistance", "increased defences", "Attack/Cast Speed"],
+    "Gloves": ["Maximum Life", "Attack/Cast Speed", "Elemental Resistance", "Adds Damage to Attacks"],
+    "Boots": ["Maximum Life", "Movement Speed", "Elemental Resistance"],
+    "Ring": ["Adds Damage to Attacks", "Maximum Life", "Elemental Resistance", "Attributes"],
+    "Amulet": ["+Level of Skills", "Adds Damage", "Critical Hit Chance", "Maximum Life", "Attributes"],
+    "Belt": ["Maximum Life", "Elemental Resistance", "Armour/Evasion/Energy Shield", "Flask Charges"]
+  },
+  "archetypeMods": {
+    "attack": {
+      "desirable": ["physical damage", "as extra", "attack speed", "accuracy", "critical", "to level of all projectile", "to level of all attack", "to level of all melee", "projectile", "adds", "maximum life", "resistance", "to all attributes", "to strength", "to dexterity", "movement speed", "leech", "penetration"],
+      "filler": ["spell damage", "cast speed", "to level of all spell", "minion", "increased mana regeneration", "energy shield regeneration"]
+    },
+    "caster": {
+      "desirable": ["spell damage", "as extra", "cast speed", "critical", "to level of all spell", "maximum mana", "maximum life", "resistance", "to intelligence", "to all attributes", "movement speed", "penetration", "increased mana"],
+      "filler": ["attack speed", "increased physical damage", "accuracy", "melee", "minion", "to level of all attack"]
+    },
+    "minion": {
+      "desirable": ["minion", "to level of all minion", "spirit", "maximum life", "resistance", "to all attributes", "movement speed", "to level of all spell"],
+      "filler": ["attack speed", "increased physical damage", "accuracy", "increased spell damage", "critical hit chance for spells"]
+    },
+    "defence": {
+      "desirable": ["maximum life", "maximum energy shield", "armour", "evasion", "resistance", "to all attributes", "block", "movement speed", "life regeneration", "stun threshold"],
+      "filler": ["increased physical damage", "spell damage", "attack speed", "cast speed", "minion", "accuracy"]
+    }
+  },
+  "ilvlBreakpoints": [
+    { "mod": "increased Movement Speed (T1)", "slot": "Boots", "ilvl": 82 },
+    { "mod": "Elemental Resistance (T1)", "slot": "", "ilvl": 82 },
+    { "mod": "Chaos Resistance (T1)", "slot": "Body Armour", "ilvl": 81 },
+    { "mod": "+Level of all Lightning Spell Skills (T1)", "slot": "Wand", "ilvl": 81 },
+    { "mod": "Bow fires additional Arrows", "slot": "Bow", "ilvl": 82 }
+  ],
+  "techniques": [
+    { "name": "Isolation (fracture + side annul)", "when": "deterministically delete one specific unwanted mod", "how": "Fracture a GOOD mod on the same side as the unwanted one, activate Sinistral/Dextral Annulment for that side, then Annul — the only legal target left is the bad mod." },
+    { "name": "Desecrate loop", "when": "chase a specific Lich (Kurgal/Amanamu/Ulaman) mod", "how": "Open a slot on the desired side, activate Sinistral/Dextral Necromancy + the Lich omen + Abyssal Echoes, apply a Preserved/Ancient Bone, reveal at the Well of Souls; on a miss use Omen of Light + Annul and retry." },
+    { "name": "Perfect Essence + Crystallisation", "when": "upgrade one filler mod into a specific guaranteed mod", "how": "Fill the side you DON'T want removed, pick the Crystallisation omen for the removable side, then apply the Perfect Essence — it removes one mod from the chosen side and adds its guaranteed mod." },
+    { "name": "Catalyst bias (jewellery)", "when": "tilt a jewellery slam toward a tag (the in-league replacement for Homogenising)", "how": "Apply 5-10 catalysts of the target tag (Flesh=life, Tul's=cold, ...), activate Omen of Catalysing Exaltation, then Greater Exalt. Breach Rings reach 50% quality for a stronger tilt." },
+    { "name": "Whittling cleanup", "when": "remove one low-ilvl filler mod from an otherwise finished item", "how": "Activate Omen of Whittling, hover the Chaos Orb to confirm it targets the lowest item-level mod (NOT necessarily lowest tier), then Chaos." },
+    { "name": "Sandbox first", "when": "before spending real currency on any non-trivial craft", "how": "Model the exact omen/currency sequence on craftofexile.com (PoE2 mode) and compare expected cost to the item's value." }
+  ],
+  "workflowOrder": [
+    "Acquire a base at the right item level (check PoE2DB for the highest T1 ilvl gate you need)",
+    "Essence to Rare, guaranteeing a key mod (tag-aware on jewellery)",
+    "Establish a tag anchor on jewellery (for the catalyst step)",
+    "Exalt slams to fill open slots (Sinistral/Dextral to pick the side)",
+    "Desecrate for an exclusive Lich mod if the build wants one",
+    "Clean up the weak mod with side-targeted Annul / Whittling",
+    "Fracture keepers (high-end only)",
+    "Final slams with Perfect-tier currency",
+    "Apply quality / catalysts",
+    "Divine for value rolls",
+    "Add sockets and runes / soul cores",
+    "Corrupt last (locks the item)"
+  ],
+  "sources": [
+    "https://domistae.github.io/poe2-leveling/poe2_crafting_codex.html",
+    "https://maxroll.gg/poe2/resources/path-of-exile-2-crafting-overview",
+    "https://maxroll.gg/poe2/news/0-5-0-patch-notes-return-of-the-ancients",
+    "https://mobalytics.gg/poe-2/guides/omen-crafting",
+    "https://poe2db.tw/us/"
+  ]
+}

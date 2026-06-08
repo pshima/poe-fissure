@@ -1,0 +1,11 @@
+# Caddy obtains and renews a TLS certificate automatically for $DOMAIN and
+# reverse-proxies to the Go app. The app sets Secure session cookies, which work
+# because the browser connects over HTTPS here.
+{
+	email {$ACME_EMAIL}
+}
+
+{$DOMAIN} {
+	encode gzip
+	reverse_proxy app:8080
+}

@@ -27,6 +27,23 @@ go.work.sum
 # env file
 .env
 
+# poe-fissure secrets / local state (never commit)
+config.yaml
+token.json
+trade_stat_ids.json
+/poefissure
+/poefissure-server
+/snapshots/
+/example/
+/data/
+/.env
+deploy/.env
+.env.local
+
+# frontend build artifacts
+web/node_modules/
+web/dist/
+
 # Editor/IDE
 # .idea/
 # .vscode/

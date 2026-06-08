@@ -1,0 +1,40 @@
+# Production stack for the blt-infra DigitalOcean droplet (droplet-sfo Cloudflare
+# Tunnel). Cloudflare terminates TLS; the cloudflared sidecar forwards tunnel
+# traffic directly to the app on a private network — no host ports, no Caddy.
+#
+# Matches the blt-infra "DO Droplet Apps" pattern. The Terraform ingress rule
+# must point at this app's service+port:  service = "http://poefissure:8080".
+#
+# Deploy (from /opt/poefissure on the droplet, as the deploy user):
+#   docker compose -f docker-compose.prod.yml up -d --build
+services:
+  poefissure:
+    build:
+      context: .
+      dockerfile: deploy/Dockerfile
+    container_name: poefissure
+    env_file: .env
+    volumes:
+      - poefissure-data:/data
+    networks:
+      - poefissure
+    restart: unless-stopped
+
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    container_name: poefissure-cloudflared
+    command: tunnel run
+    environment:
+      - TUNNEL_TOKEN=${TUNNEL_TOKEN}
+    depends_on:
+      - poefissure
+    networks:
+      - poefissure
+    restart: unless-stopped
+
+volumes:
+  poefissure-data:
+
+networks:
+  poefissure:
+    driver: bridge

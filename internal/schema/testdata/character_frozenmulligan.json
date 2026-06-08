@@ -1,0 +1,112 @@
+{
+  "character": {
+    "id": "c49d8d01a1b2c3d4e5f60718293a4b5c6d7e8f90112233445566778899aabbcc",
+    "name": "Frozenmulligan",
+    "realm": "poe2",
+    "class": "Sorceress",
+    "league": "Runes of Aldur",
+    "level": 87,
+    "experience": 1923847123,
+    "equipment": [
+      {
+        "verified": true,
+        "w": 2,
+        "h": 3,
+        "icon": "https://web.poecdn.com/image/item/helmet.png",
+        "name": "Doom Visor",
+        "typeLine": "Lacquered Helmet",
+        "baseType": "Lacquered Helmet",
+        "rarity": "Rare",
+        "identified": true,
+        "ilvl": 81,
+        "inventoryId": "Helm",
+        "frameType": 2,
+        "implicitMods": ["+18 to maximum Mana"],
+        "explicitMods": [
+          "+72 to maximum Life",
+          "+34% to Fire Resistance",
+          "+25 to Intelligence"
+        ]
+      },
+      {
+        "verified": true,
+        "w": 2,
+        "h": 3,
+        "icon": "https://web.poecdn.com/image/item/body.png",
+        "name": "Rune Shroud",
+        "typeLine": "Spiral Vestments",
+        "baseType": "Spiral Vestments",
+        "rarity": "Rare",
+        "identified": true,
+        "ilvl": 84,
+        "inventoryId": "BodyArmour",
+        "frameType": 2,
+        "explicitMods": [
+          "+110 to maximum Life",
+          "+45 to maximum Energy Shield",
+          "+22% to Cold Resistance"
+        ],
+        "runeMods": ["+12% to Lightning Resistance"]
+      },
+      {
+        "verified": true,
+        "w": 1,
+        "h": 1,
+        "name": "",
+        "typeLine": "Lapis Amulet",
+        "baseType": "Lapis Amulet",
+        "rarity": "Rare",
+        "identified": true,
+        "ilvl": 80,
+        "inventoryId": "Amulet",
+        "frameType": 2,
+        "implicitMods": ["+20 to Intelligence"],
+        "explicitMods": ["+15% increased Spell Damage", "+38 to maximum Life"]
+      },
+      {
+        "verified": true,
+        "w": 2,
+        "h": 4,
+        "name": "Winter Tongue",
+        "typeLine": "Sceptre",
+        "baseType": "Sceptre",
+        "rarity": "Rare",
+        "identified": true,
+        "ilvl": 82,
+        "inventoryId": "Weapon",
+        "frameType": 2,
+        "explicitMods": [
+          "Adds 30 to 55 Cold Damage",
+          "12% increased Cast Speed",
+          "+45% to Critical Damage Bonus"
+        ]
+      }
+    ],
+    "skills": [
+      {
+        "verified": true,
+        "w": 1,
+        "h": 1,
+        "name": "",
+        "typeLine": "Frostbolt",
+        "baseType": "Frostbolt",
+        "identified": true,
+        "frameType": 4
+      },
+      {
+        "verified": true,
+        "w": 1,
+        "h": 1,
+        "name": "",
+        "typeLine": "Cold Mastery",
+        "baseType": "Cold Mastery",
+        "identified": true,
+        "frameType": 4
+      }
+    ],
+    "passives": {
+      "hashes": [12345, 23456, 34567, 45678],
+      "mastery_effects": {"12345": 3}
+    }
+  }
+}
